@@ -3,10 +3,9 @@ package com.example.boundary;
 import com.example.main.CommandProducer;
 import com.example.main.StrategyBoundary;
 import com.example.control.ProdutoControl;
+import com.example.entity.Produto;
 
 import java.util.Optional;
-
-import com.example.entity.Produto;
 
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
@@ -26,7 +25,6 @@ import javafx.scene.layout.Pane;
 import javafx.util.converter.NumberStringConverter;
 
 public class ProdutoBoundary extends CommandProducer implements StrategyBoundary {
-
 	private TextField txtIdProduto = new TextField();
 	private TextField txtNomeProduto = new TextField();
 	private TextArea txtADescricaoProduto = new TextArea();
@@ -41,9 +39,6 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 
 
 	private void criarTabela() {
-
-
-
 		TableColumn<Produto, Integer> col1 = new TableColumn<>("Id");
 		col1.setCellValueFactory( new PropertyValueFactory<>("idProduto") );
 
@@ -53,13 +48,12 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 		TableColumn<Produto, String> col3 = new TableColumn<>("Descrição");
 		col3.setCellValueFactory( new PropertyValueFactory<>("descricaoProduto") );
 
-		TableColumn<Produto, Integer> col4 = new TableColumn<>("Quantida de Pecas");
-		col4.setCellValueFactory( new PropertyValueFactory<>("quantidadePecas") );
+		TableColumn<Produto, Integer> col4 = new TableColumn<>("Quantidade de Pecas");
+		col4.setCellValueFactory(new PropertyValueFactory<>("quantidadeDePecas"));
 
 
 		TableColumn<Produto, Double> col5 = new TableColumn<>("Preço Produto");
 		col5.setCellValueFactory( new PropertyValueFactory<>("precoProduto") );
-
 
 
 		TableColumn<Produto, String> col6 = new TableColumn<>("Ações");
@@ -99,7 +93,6 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 		col6.setPrefWidth(150);
 
 		table.getColumns().addAll(col1, col2, col3, col4, col5, col6);
-
 		table.setItems(control.getListaView());
 
 		table
@@ -128,12 +121,8 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 
 		Bindings.bindBidirectional(txtIdProduto.textProperty(), control.idProduto, new NumberStringConverter());
 		Bindings.bindBidirectional(txtNomeProduto.textProperty(), control.nomeProduto);
-
-
 		Bindings.bindBidirectional(txtADescricaoProduto.textProperty(), control.descricaoProduto);
-
-		Bindings.bindBidirectional(txtQtdePecas.textProperty(), control.quantidadePecas, new NumberStringConverter());
-
+		Bindings.bindBidirectional(txtQtdePecas.textProperty(), control.quantidadeDePecas, new NumberStringConverter());
 		Bindings.bindBidirectional(txtPrecoProduto.textProperty(), control.precoProduto, new NumberStringConverter());
 
 

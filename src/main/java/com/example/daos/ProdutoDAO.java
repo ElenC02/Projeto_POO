@@ -50,7 +50,7 @@ public class ProdutoDAO implements IProdutoDAO{
 		               stmt.setInt(1, p.getIdProduto());
 		               stmt.setString(2, p.getNomeProduto());
 		               stmt.setString(3, p.getDescricaoProduto());
-		               stmt.setInt(4, p.getQuantidadePeca());
+		               stmt.setInt(4, p.getQuantidadeDePecas());
 		               stmt.setDouble(5, p.getPrecoProduto());
 		               stmt.executeUpdate();
 		               
@@ -69,8 +69,6 @@ public class ProdutoDAO implements IProdutoDAO{
 		            Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
 		            
 		            String sql = "SELECT * FROM TableProdutos WHERE nomeDoProduto like '%" + nome + "%'";
-//		            System.out.println(sql);
-		            
 
 		            PreparedStatement stmt = con.prepareStatement(sql);
 		            ResultSet rs = stmt.executeQuery();
@@ -82,7 +80,7 @@ public class ProdutoDAO implements IProdutoDAO{
 	            	Produto p = new Produto();
 	                p.setIdProduto( rs.getInt("idProduto") );
 	                p.setNomeProduto( rs.getString("nomeDoProduto") );
-	                p.setQuantidadePeca(rs.getInt("quantidadeDePecas"));
+	                p.setQuantidadeDePecas(rs.getInt("quantidadeDePecas"));
 	                p.setPrecoProduto( rs.getDouble("precoUnitario") );
 	                p.setDescricaoProduto( rs.getString("descricao") );
 	               

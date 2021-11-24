@@ -15,9 +15,8 @@ public class ProdutoControl {
 	    public IntegerProperty idProduto = new SimpleIntegerProperty(0);
 	    public StringProperty nomeProduto = new SimpleStringProperty("");
 	    public StringProperty descricaoProduto = new SimpleStringProperty("");
-	    public  DoubleProperty precoProduto = new SimpleDoubleProperty(0);
-	    public   IntegerProperty quantidadePecas = new SimpleIntegerProperty(0);
-	
+	    public DoubleProperty precoProduto = new SimpleDoubleProperty(0);
+	    public IntegerProperty quantidadeDePecas = new SimpleIntegerProperty(0);
 
 	    private static int counter = 0;
 
@@ -29,7 +28,7 @@ public class ProdutoControl {
 	        p.setIdProduto(idProduto.get());
 	        p.setNomeProduto(nomeProduto.get());
 	        p.setDescricaoProduto(descricaoProduto.get());
-	        p.setQuantidadePeca(quantidadePecas.get());
+	        p.setQuantidadeDePecas(quantidadeDePecas.get());
 	        p.setPrecoProduto(precoProduto.get());
 	       
 	        return p;
@@ -39,7 +38,7 @@ public class ProdutoControl {
 	        idProduto.set(p.getIdProduto());
 	        nomeProduto.set(p.getNomeProduto());
 	        descricaoProduto.set(p.getDescricaoProduto());
-	        quantidadePecas.set(p.getQuantidadePeca());
+			quantidadeDePecas.set(p.getQuantidadeDePecas());
 	        precoProduto.set(p.getPrecoProduto());
 	       
 	    }
@@ -53,11 +52,6 @@ public class ProdutoControl {
 	        	IprodutoDAO.atualizar(idProduto.get(), p);
 	        }
 	        atualizarListaView();
-	        
-//	    	Produto p = getEntity();;
-//	    	IprodutoDAO.adicionar(p);
-//	         atualizarListaView();
-	    
 	    }
 
 	    public void novoProduto() {

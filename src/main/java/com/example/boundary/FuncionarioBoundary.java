@@ -105,8 +105,6 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 	}
 
 
-
-
   @Override
 	public Pane render() {
 		BorderPane panPrincipal = new BorderPane();
@@ -123,7 +121,8 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 		Bindings.bindBidirectional(txtCargoFuncionario.textProperty(), control.cargoFuncionario);
 		Bindings.bindBidirectional(txtSetor.textProperty(), control.setor);
 
-
+	  	txtIdFuncionario.setDisable(true);
+	  	txtIdFuncionario.setEditable(false);
 
 		panCampos.add(new Label("id Funcionario"), 0, 0);
 		panCampos.add(txtIdFuncionario, 1, 0);
@@ -141,7 +140,7 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 
 		panCampos.add(btnSalvar, 0, 4);
 		panCampos.add(btnPesquisar, 1, 4);
-
+		panCampos.add(btnNovoFuncionario, 2, 4);
 
 
 		btnSalvar.setOnAction(e -> {

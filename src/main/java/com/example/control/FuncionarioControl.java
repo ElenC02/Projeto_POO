@@ -20,7 +20,8 @@ public class FuncionarioControl {
 	public IntegerProperty idUsuario = new SimpleIntegerProperty(0);
     public StringProperty cargoFuncionario = new SimpleStringProperty("");
 	public StringProperty  setor = new SimpleStringProperty("");
-	
+
+    private static int counter = 0;
 	
     private ObservableList<Funcionario> listaViewF = FXCollections.observableArrayList();
     private IFuncionarioDAO IFuncionarioDAO = new FuncionarioDAO();
@@ -31,8 +32,7 @@ public class FuncionarioControl {
         f.setIdUsuario(idUsuario.get());
         f.setCargoFuncionario(cargoFuncionario.get());
         f.setSetor(setor.get());
-     
-       
+
         return f;
     }
 
@@ -56,7 +56,7 @@ public class FuncionarioControl {
 
     public void novoFuncionario() {
     	Funcionario f = new Funcionario();
-        f.setIdFuncionario(0);
+        f.setIdFuncionario(++counter);
         setEntity(f);
     }
 

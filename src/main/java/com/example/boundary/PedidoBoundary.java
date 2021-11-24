@@ -1,7 +1,9 @@
 package com.example.boundary;
 
+import com.example.control.*;
 import com.example.main.CommandProducer;
 import com.example.main.StrategyBoundary;
+
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +18,6 @@ import javafx.util.converter.NumberStringConverter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.example.control.*;
-import com.example.entity.*;
 
 public class PedidoBoundary extends CommandProducer implements StrategyBoundary {
     private ComboBox<String> cmbFormaPagamento = new ComboBox<>();
@@ -25,6 +25,7 @@ public class PedidoBoundary extends CommandProducer implements StrategyBoundary 
     private ComboBox<String> cmbIdCliente = new ComboBox<>();
 
     private PedidoControl control = new PedidoControl();
+    private CarrinhoControl carrinhoControl = new CarrinhoControl();
 
     private TextField txtIdPedido = new TextField();
     private TextField txtIdCarrinho = new TextField();
@@ -39,7 +40,7 @@ public class PedidoBoundary extends CommandProducer implements StrategyBoundary 
     private Button btnCancelarPedido = new Button("Cancelar Pedido");
     private Button btnCadastrarCliente = new Button("Cadastrar Cliente");
     private Button btnCadastrarFuncionario = new Button("Cadastrar Funcionario");
-    CarrinhoControl carrinhoControl = new CarrinhoControl();
+
 
     private void criarSelect() {
         ObservableList<String> formapagamentos =

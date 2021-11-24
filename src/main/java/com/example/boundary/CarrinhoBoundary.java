@@ -167,12 +167,6 @@ public class CarrinhoBoundary extends CommandProducer  implements StrategyBounda
             int codigoCarrinho = Integer.parseInt(txtCodigoCarrinho.getText());
             control.salvarCarrinho(codigoCarrinho);
             executeCommand("BOUNDARY-PEDIDO");
-
-//            PedidoBoundary pedido = new PedidoBoundary(codigoCarrinho);
-
-//            panPrincipal.setBottom(pedido.render());
-//            panPrincipal.setCenter(pedido.renderCenter(table));
-//            panPrincipal.setTop(pedido.renderTop(codigoCarrinho));
         });
 
         btnBuscarProduto.setOnAction(this::buscarProduto);

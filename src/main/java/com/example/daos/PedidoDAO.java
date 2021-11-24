@@ -11,6 +11,10 @@ import java.util.List;
 
 
 public class PedidoDAO implements  IPedidoDAO {
+    //    private static final String DBURL = "jdbc:mariadb://localhost:3306/eletronicosdb";
+    //    private static final String DBUSER = "root";
+    //    private static final String DBPASS = "";
+
     private static final String DBURL = "jdbc:mysql://localhost:3306/EletronicosDB"; //Colocar sua conexão
     private static final String DBUSER = "pet"; //Colocar seu user
     private static final String DBPASS = "123456pet"; //Colocar sua senha
