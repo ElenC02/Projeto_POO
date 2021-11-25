@@ -9,7 +9,6 @@ import java.util.List;
 
 
 public class UsuariosControl {
-
     public IntegerProperty idUsuario = new SimpleIntegerProperty(0);
     public StringProperty nomeUsuario = new SimpleStringProperty("");
     public IntegerProperty CEP = new SimpleIntegerProperty(0);
@@ -83,7 +82,5 @@ public class UsuariosControl {
     public ObservableList<Usuarios> getListaView() {
         return listaView;
     }
-
-
 } // fim da classe
 

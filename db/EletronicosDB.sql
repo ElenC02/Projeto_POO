@@ -59,7 +59,7 @@ CREATE TABLE TableUsuario (
 	ruaEnderecoNumero VARCHAR(50),
 	cidadeEndereco VARCHAR(25),
 	estadoEndereco CHAR(2),
-	telefoneUsuario INTEGER(11) NOT NULL,
+	telefoneUsuario CHAR(20),
 	tipoUsuario CHAR(2),
 	login VARCHAR(50),
 	senha VARCHAR(20)
