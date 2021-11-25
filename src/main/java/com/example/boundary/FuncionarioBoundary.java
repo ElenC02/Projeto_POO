@@ -44,7 +44,7 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 		TableColumn<Funcionario, Integer> col1 = new TableColumn<>("Id Funcionario");
 		col1.setCellValueFactory( new PropertyValueFactory<>("idFuncionario") );
 
-		TableColumn<Funcionario, Integer> col2 = new TableColumn<>("Id Usuário");
+		TableColumn<Funcionario, Integer> col2 = new TableColumn<>("Id Usuï¿½rio");
 		col2.setCellValueFactory( new PropertyValueFactory<>("idUsuario") );
 
 		TableColumn<Funcionario, String> col3 = new TableColumn<>("Cargo");
@@ -68,7 +68,7 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 					btn.setOnAction( (e) -> {
 						Funcionario f = getTableView().getItems().get(getIndex());
 						Alert alert = new Alert(Alert.AlertType.WARNING,
-								"Você confirma a remoção do Funcionario Id " +
+								"Vocï¿½ confirma a remoï¿½ï¿½o do Funcionario Id " +
 										f.getIdFuncionario(), ButtonType.OK, ButtonType.CANCEL);
 						Optional<ButtonType> clicado = alert.showAndWait();
 						if (clicado.isPresent() &&
@@ -140,7 +140,6 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 
 		panCampos.add(btnSalvar, 0, 4);
 		panCampos.add(btnPesquisar, 1, 4);
-		panCampos.add(btnNovoFuncionario, 2, 4);
 
 
 		btnSalvar.setOnAction(e -> {
@@ -149,10 +148,6 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 
 		btnPesquisar.setOnAction( e -> {
 			control.pesquisar();
-		});
-
-		btnNovoFuncionario.setOnAction( e -> {
-			control.novoFuncionario();
 		});
 
 		panPrincipal.setTop(panCampos);

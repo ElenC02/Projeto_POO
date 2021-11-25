@@ -66,18 +66,17 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
 
 	@Override
-	public List<Funcionario> pesquisarPorID(int n) {
+	public List<Funcionario> pesquisarPorCargo(String cargo) {
 		List<Funcionario> encontrados = new ArrayList<>();
 		try {
 			Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-
-			String sql = "SELECT * FROM TableFuncionario"; // WHERE idFuncionario like '%" + n + "%'";
-
+			String sql = "SELECT * FROM TableFuncionario WHERE cargoFuncionario like '%" + cargo + "%'";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 
 			while(rs.next()) {
 				Funcionario f = new Funcionario();
+
 				f.setIdFuncionario( rs.getInt("idFuncionario") );
 				f.setIdUsuario( rs.getInt("idUsuario") );
 				f.setCargoFuncionario(rs.getString("cargoFuncionario"));
@@ -120,7 +119,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 	@Override
 	public void remover(int id) {
 		try (Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS)) {
-			String sql = "DELETE FROM TableFuncionario WHERE idProduto = ?";
+			String sql = "DELETE FROM TableFuncionario WHERE idFuncionario = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.executeUpdate();

@@ -54,15 +54,10 @@ public class FuncionarioControl {
         atualizarListaView();
     }
 
-    public void novoFuncionario() {
-    	Funcionario f = new Funcionario();
-        f.setIdFuncionario(++counter);
-        setEntity(f);
-    }
 
     public void pesquisar() {
         listaViewF.clear();
-        List<Funcionario> encontrados = IFuncionarioDAO.pesquisarPorID(idFuncionario.get());
+        List<Funcionario> encontrados = IFuncionarioDAO.pesquisarPorCargo(cargoFuncionario.get());
         listaViewF.addAll(encontrados);
     }
 
@@ -70,12 +65,11 @@ public class FuncionarioControl {
            IFuncionarioDAO.remover(idFuncionario);
            atualizarListaView();
     }
-          
-    
+
 
     public void atualizarListaView() {
     	listaViewF.clear();
-    	listaViewF.addAll(IFuncionarioDAO.pesquisarPorID(0));
+    	listaViewF.addAll(IFuncionarioDAO.pesquisarPorCargo(""));
     }
 
     public ObservableList<Funcionario> getListaView() {

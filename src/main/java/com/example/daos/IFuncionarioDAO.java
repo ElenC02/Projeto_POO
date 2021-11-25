@@ -6,8 +6,8 @@ import com.example.entity.Funcionario;
 public interface IFuncionarioDAO {
 	
 	void adicionar(Funcionario f);
-	  
-	  List<Funcionario> pesquisarPorID(int id);
+
+	List<Funcionario> pesquisarPorCargo(String cargo);
 	  
 	  void atualizar(int id, Funcionario p);
 	  
