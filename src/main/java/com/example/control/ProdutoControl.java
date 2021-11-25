@@ -18,8 +18,6 @@ public class ProdutoControl {
 	    public DoubleProperty precoProduto = new SimpleDoubleProperty(0);
 	    public IntegerProperty quantidadeDePecas = new SimpleIntegerProperty(0);
 
-	    private static int counter = 0;
-
 	    private ObservableList<Produto> listaView = FXCollections.observableArrayList();
 	    private IProdutoDAO IprodutoDAO = new ProdutoDAO();
 
@@ -45,19 +43,21 @@ public class ProdutoControl {
 
 	    public void salvar() {
 	    	Produto p = getEntity();
-	        if (p.getIdProduto() == 0) {
+			boolean encontrado = false;
+
+			for(int i = 0; i < listaView.size(); i++ ) {
+				if (p.getIdProduto() == listaView.get(i).getIdProduto()) {
+					encontrado = true;
+				}
+			}
+
+			if (!encontrado) {
 	        	IprodutoDAO.adicionar(p);
-	            setEntity(new Produto());
 	        } else {
-	        	IprodutoDAO.atualizar(idProduto.get(), p);
+	        	IprodutoDAO.atualizar(p);
 	        }
 	        atualizarListaView();
-	    }
-
-	    public void novoProduto() {
-	    	Produto p = new Produto();
-	        p.setIdProduto(++counter);
-	        setEntity(p);
+			setEntity(new Produto());
 	    }
 
 	    public void pesquisar() {
@@ -70,9 +70,8 @@ public class ProdutoControl {
 	           IprodutoDAO.remover(idProduto);
 	           atualizarListaView();
 	           
-	            }
-	          
-	    
+		}
+
 
 	    public void atualizarListaView() {
 	    	listaView.clear();

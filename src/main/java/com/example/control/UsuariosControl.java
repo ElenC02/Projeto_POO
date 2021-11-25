@@ -54,6 +54,7 @@ public class UsuariosControl {
         Usuarios u = getEntity();
         usuarioDAO.adicionar(u);
         atualizarListaView();
+        setEntity(new Usuarios());
     }
 
     public void pesquisar() {
@@ -69,9 +70,9 @@ public class UsuariosControl {
 
     public void atualizarU() {
         Usuarios u = getEntity();
-        usuarioDAO.atualizar(u.getIdUsuario(), u.getNomeUsuario(), u.getCEP(),u.getRuaEnderecoNumero(),
-                u.getCidadeEndereco(),u.getEstadoEndereco(), u.getTelefoneUsuario(), u.getTipoUsuario(), u.getLogin(),u.getSenha());
+        usuarioDAO.atualizar(u);
         atualizarListaView();
+        setEntity(new Usuarios());
     }
 
     public void atualizarListaView() {

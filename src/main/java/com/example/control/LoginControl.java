@@ -44,10 +44,9 @@ public class LoginControl {
         String[] nomes = loginDAO.pesquisarPorNome(l.getNomeAcesso(), l.getLoginAcesso(), l.getSenhaAcesso());
 
 
-        if (nomes[1].equals(log[1])) {
-            if (nomes[2].equals(log[2])) {
-                setEntity("ACESSO LIBERADO");
-            }
+        if (nomes[1].equals(log[1]) & (nomes[2].equals(log[2]))) {
+            setEntity("ACESSO LIBERADO");
+
         } else {
             setEntity("ACESSO NEGADO - TENTE NOVAMENTE");
         }

@@ -1,9 +1,9 @@
 package com.example.control;
 
-
 import java.util.List;
 import com.example.daos.FuncionarioDAO;
 import com.example.daos.IFuncionarioDAO;
+import com.example.entity.Cliente;
 import com.example.entity.Funcionario;
 
 
@@ -17,19 +17,15 @@ import javafx.collections.ObservableList;
 
 public class FuncionarioControl {
 	public IntegerProperty idFuncionario = new SimpleIntegerProperty(0);
-	public IntegerProperty idUsuario = new SimpleIntegerProperty(0);
     public StringProperty cargoFuncionario = new SimpleStringProperty("");
 	public StringProperty  setor = new SimpleStringProperty("");
 
-    private static int counter = 0;
-	
     private ObservableList<Funcionario> listaViewF = FXCollections.observableArrayList();
     private IFuncionarioDAO IFuncionarioDAO = new FuncionarioDAO();
 
     public Funcionario getEntity() {
     	Funcionario f = new Funcionario();
         f.setIdFuncionario(idFuncionario.get());
-        f.setIdUsuario(idUsuario.get());
         f.setCargoFuncionario(cargoFuncionario.get());
         f.setSetor(setor.get());
 
@@ -38,20 +34,27 @@ public class FuncionarioControl {
 
     public void setEntity(Funcionario f) {
         idFuncionario.set(f.getIdFuncionario());
-        idUsuario.set(f.getIdUsuario());
         cargoFuncionario.set(f.getCargoFuncionario());
         setor.set(f.getSetor());
     }
 
     public void salvar() {
     	Funcionario f = getEntity();
-        if (f.getIdFuncionario() == 0) {
+        boolean encontrado = false;
+
+        for(int i = 0; i < listaViewF.size(); i++ ) {
+            if (f.getIdFuncionario() == listaViewF.get(i).getIdFuncionario()) {
+                encontrado = true;
+            }
+        }
+
+        if (!encontrado) {
         	IFuncionarioDAO.adicionar(f);
-            setEntity(new Funcionario());
         } else {
-        	IFuncionarioDAO.atualizar(idFuncionario.get(), f);
+        	IFuncionarioDAO.atualizar(f);
         }
         atualizarListaView();
+        setEntity(new Funcionario());
     }
 
 
@@ -62,8 +65,8 @@ public class FuncionarioControl {
     }
 
     public void remover(int idFuncionario) {
-           IFuncionarioDAO.remover(idFuncionario);
-           atualizarListaView();
+        IFuncionarioDAO.remover(idFuncionario);
+        atualizarListaView();
     }
 
 

@@ -95,9 +95,9 @@ public class ClienteBoundary extends CommandProducer implements StrategyBoundary
         col3.setPrefWidth(100);
         col4.setPrefWidth(100);
         col5.setPrefWidth(100);
-        col6.setPrefWidth(100);
-        col7.setPrefWidth(100);
-        col8.setPrefWidth(100);
+        col6.setPrefWidth(150);
+        col7.setPrefWidth(150);
+        col8.setPrefWidth(150);
         col9.setPrefWidth(100);
 
         tableL.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8, col9);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.entity.Funcionario;
+import javafx.scene.control.Alert;
 
 public class FuncionarioDAO implements IFuncionarioDAO{
 //
@@ -43,23 +44,23 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 		try {
 			Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
 
-			String sql ="INSERT INTO TableFuncionario (idFuncionario, idUsuario, cargoFuncionario, setor)  "
-					+ "VALUES (?, ?, ?, ? )";
+			String sql ="INSERT INTO TableFuncionario (idFuncionario, cargoFuncionario, setor)  "
+					+ "VALUES (?, ?, ? )";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setInt(1, f.getIdFuncionario());
-			stmt.setInt(2, f.getIdUsuario());
-			stmt.setString(3, f.getCargoFuncionario());
-			stmt.setString(4, f.getSetor());
+			stmt.setString(2, f.getCargoFuncionario());
+			stmt.setString(3, f.getSetor());
 
 			stmt.executeUpdate();
 
-
-
-
 		} catch (Exception e) {
-			e.printStackTrace();}
+			Alert alert = new Alert(Alert.AlertType.WARNING,
+					"Ocorreu um erro na conexão com o Banco de Dados\n" + e);
+			alert.showAndWait();
+			e.printStackTrace();
+		}
 
 	}
 
@@ -78,7 +79,6 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 				Funcionario f = new Funcionario();
 
 				f.setIdFuncionario( rs.getInt("idFuncionario") );
-				f.setIdUsuario( rs.getInt("idUsuario") );
 				f.setCargoFuncionario(rs.getString("cargoFuncionario"));
 				f.setSetor( rs.getString("setor") );
 
@@ -88,6 +88,9 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 			con.close();
 
 		} catch (Exception e) {
+			Alert alert = new Alert(Alert.AlertType.WARNING,
+					"Ocorreu um erro na conexão com o Banco de Dados\n" + e);
+			alert.showAndWait();
 			e.printStackTrace();
 		}
 		return encontrados;
@@ -95,24 +98,25 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
 
 	@Override
-	public void atualizar(int id, Funcionario f) {
+	public void atualizar(Funcionario f) {
 		try {
 			Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-			String sql = "UPDATE TableFuncionario SET idFuncionario = ?, idUsuario = ?, cargoFuncionario = ?, setor = ? WHERE idFuncionario = ?";
+			String sql = "UPDATE TableFuncionario SET idFuncionario = ?, cargoFuncionario = ?, setor = ? WHERE idFuncionario = ?";
 			System.out.println(sql);
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, f.getIdFuncionario());
-			stmt.setInt(2, f.getIdUsuario());
-			stmt.setString(3, f.getCargoFuncionario());
-			stmt.setString(4, (f.getSetor()));
-			stmt.setInt(6,f.getIdFuncionario());
+			stmt.setString(2, f.getCargoFuncionario());
+			stmt.setString(3, f.getSetor());
+			stmt.setInt(4, f.getIdFuncionario());
 
 			stmt.executeUpdate();
 			con.close();
 		} catch (SQLException  e) {
+			Alert alert = new Alert(Alert.AlertType.WARNING,
+					"Ocorreu um erro na conexão com o Banco de Dados\n" + e);
+			alert.showAndWait();
 			e.printStackTrace();
 		}
-
 	}
 
 
@@ -124,6 +128,9 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 		} catch (Exception e) {
+			Alert alert = new Alert(Alert.AlertType.WARNING,
+					"Ocorreu um erro na conexão com o Banco de Dados\n" + e);
+			alert.showAndWait();
 			e.printStackTrace();
 		}
 	}

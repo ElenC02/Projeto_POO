@@ -16,7 +16,6 @@ CREATE TABLE GroupCarrinho (
 
 CREATE TABLE TableCliente (
 	idCliente INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	idUsuario INTEGER NOT NULL,
 	nomeCliente VARCHAR(30) NOT NULL,
 	CPF INTEGER NOT NULL,
 	bandeiraCartao VARCHAR(20),
@@ -28,7 +27,6 @@ CREATE TABLE TableCliente (
 
 CREATE TABLE TableFuncionario (
 	idFuncionario INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	idUsuario INTEGER NOT NULL,
 	cargoFuncionario VARCHAR(30),
 	setor VARCHAR(30)
 );
@@ -65,10 +63,8 @@ CREATE TABLE TableUsuario (
 	senha VARCHAR(20)
 );
 
-ALTER TABLE `TableCliente` ADD CONSTRAINT `fk_idUsuario` FOREIGN KEY ( `idUsuario` ) REFERENCES `TableUsuario` ( `idUsuario` );
 ALTER TABLE `TableCarrinho` ADD CONSTRAINT `fk_idProduto` FOREIGN KEY ( `idProduto` ) REFERENCES `TableProdutos` ( `idProduto` );
 ALTER TABLE `TablePedidos` ADD CONSTRAINT `fk_idCarrinho` FOREIGN KEY ( `codigoCarrinho` ) REFERENCES `TableCarrinho` ( `codigoCarrinho` );
-ALTER TABLE `TableFuncionario` ADD CONSTRAINT `fk_idUsuarioFuncionario` FOREIGN KEY ( `idUsuario` ) REFERENCES `TableUsuario` ( `idUsuario` );
 ALTER TABLE `TableCarrinho` ADD CONSTRAINT `fk_codigoCarrinho` FOREIGN KEY ( `codigoCarrinho` ) REFERENCES `GroupCarrinho` ( `codigoCarrinho` );
 
 USE EletronicosDB;

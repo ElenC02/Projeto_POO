@@ -1,13 +1,11 @@
 package com.example.daos;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.entity.Produto;
+import javafx.scene.control.Alert;
 
 
 public class ProdutoDAO implements IProdutoDAO{
@@ -75,8 +73,6 @@ public class ProdutoDAO implements IProdutoDAO{
 
 		            while(rs.next()) {
 
-		   
-	                
 	            	Produto p = new Produto();
 	                p.setIdProduto( rs.getInt("idProduto") );
 	                p.setNomeProduto( rs.getString("nomeDoProduto") );
@@ -100,8 +96,27 @@ public class ProdutoDAO implements IProdutoDAO{
 
 
 		@Override
-		public void atualizar(int id, Produto p) {
-			// TODO Auto-generated method stub
+		public void atualizar(Produto p) {
+			try {
+				Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
+				String sql = "UPDATE TableProdutos SET idProduto = ?, nomeDoProduto = ?, Descricao = ?, quantidadeDePecas = ?, precoUnitario = ? WHERE idProduto = ?";
+				PreparedStatement stmt = con.prepareStatement(sql);
+
+				stmt.setInt(1, p.getIdProduto());
+				stmt.setString(2, p.getNomeProduto());
+				stmt.setString(3, p.getDescricaoProduto());
+				stmt.setInt(4, p.getQuantidadeDePecas());
+				stmt.setDouble(5, p.getPrecoProduto());
+				stmt.setInt(6, p.getIdProduto());
+
+				stmt.executeUpdate();
+				con.close();
+			} catch (SQLException e) {
+				Alert alert = new Alert(Alert.AlertType.WARNING,
+						"Ocorreu um erro na conexão com o Banco de Dados\n" + e);
+				alert.showAndWait();
+				e.printStackTrace();
+			}
 			
 		}
 

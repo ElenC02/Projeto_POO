@@ -26,7 +26,6 @@ import javafx.util.converter.NumberStringConverter;
 public class FuncionarioBoundary extends CommandProducer implements StrategyBoundary {
 
 	private TextField txtIdFuncionario = new TextField();
-	private TextField txtIdUsuario = new TextField();
 	private TextField txtCargoFuncionario = new TextField();
 	private TextField txtSetor = new TextField();
 
@@ -34,7 +33,6 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 	private Button btnAdicionar = new Button("Adicionar");
 	private Button btnPesquisar = new Button("Pesquisar");
 	private Button btnSalvar = new Button("Salvar");
-	private Button btnNovoFuncionario = new Button("Novo funcionario");
 
 	private FuncionarioControl control = new FuncionarioControl();
 	private TableView<Funcionario> tableFuncionario = new TableView<>();
@@ -44,19 +42,16 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 		TableColumn<Funcionario, Integer> col1 = new TableColumn<>("Id Funcionario");
 		col1.setCellValueFactory( new PropertyValueFactory<>("idFuncionario") );
 
-		TableColumn<Funcionario, Integer> col2 = new TableColumn<>("Id Usu�rio");
-		col2.setCellValueFactory( new PropertyValueFactory<>("idUsuario") );
+		TableColumn<Funcionario, String> col2 = new TableColumn<>("Cargo");
+		col2.setCellValueFactory( new PropertyValueFactory<>("cargoFuncionario") );
 
-		TableColumn<Funcionario, String> col3 = new TableColumn<>("Cargo");
-		col3.setCellValueFactory( new PropertyValueFactory<>("cargoFuncionario") );
-
-		TableColumn<Funcionario, String> col4 = new TableColumn<>("Setor");
-		col4.setCellValueFactory( new PropertyValueFactory<>("setor") );
+		TableColumn<Funcionario, String> col3 = new TableColumn<>("Setor");
+		col3.setCellValueFactory( new PropertyValueFactory<>("setor") );
 
 
-		TableColumn<Funcionario, String> col5 = new TableColumn<>("Acoes");
-		col5.setCellValueFactory( new PropertyValueFactory<>("DUMMY") );
-		col5.setCellFactory( (tbCol) ->
+		TableColumn<Funcionario, String> col4 = new TableColumn<>("Ações");
+		col4.setCellValueFactory( new PropertyValueFactory<>("DUMMY") );
+		col4.setCellFactory( (tbCol) ->
 		new TableCell<Funcionario, String>() {
 			final Button btn = new Button("Remover");
 
@@ -68,7 +63,7 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 					btn.setOnAction( (e) -> {
 						Funcionario f = getTableView().getItems().get(getIndex());
 						Alert alert = new Alert(Alert.AlertType.WARNING,
-								"Voc� confirma a remo��o do Funcionario Id " +
+								"Você confirma a remoção do Funcionário Id " +
 										f.getIdFuncionario(), ButtonType.OK, ButtonType.CANCEL);
 						Optional<ButtonType> clicado = alert.showAndWait();
 						if (clicado.isPresent() &&
@@ -86,14 +81,10 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 		col2.setPrefWidth(150);
 		col3.setPrefWidth(150);
 		col4.setPrefWidth(150);
-		col5.setPrefWidth(150);
 
 
-		tableFuncionario.getColumns().addAll(col1, col2, col3, col4, col5);
-
-
+		tableFuncionario.getColumns().addAll(col1, col2, col3, col4);
 		tableFuncionario.setItems(control.getListaView());
-
 		tableFuncionario
 		.getSelectionModel()
 		.selectedItemProperty()
@@ -117,7 +108,6 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 
 
 		Bindings.bindBidirectional(txtIdFuncionario.textProperty(), control.idFuncionario, new NumberStringConverter());
-		Bindings.bindBidirectional(txtIdUsuario.textProperty(), control.idUsuario, new NumberStringConverter());
 		Bindings.bindBidirectional(txtCargoFuncionario.textProperty(), control.cargoFuncionario);
 		Bindings.bindBidirectional(txtSetor.textProperty(), control.setor);
 
@@ -127,15 +117,11 @@ public class FuncionarioBoundary extends CommandProducer implements StrategyBoun
 		panCampos.add(new Label("id Funcionario"), 0, 0);
 		panCampos.add(txtIdFuncionario, 1, 0);
 
+		panCampos.add(new Label("Cargo"), 0, 1);
+		panCampos.add(txtCargoFuncionario, 1, 1);
 
-		panCampos.add(new Label("id Usuario"), 0, 1);
-		panCampos.add(txtIdUsuario, 1, 1);
-
-		panCampos.add(new Label("Cargo"), 0, 2);
-		panCampos.add(txtCargoFuncionario, 1, 2);
-
-		panCampos.add(new Label("Setor"), 0, 3);
-		panCampos.add(txtSetor, 1, 3);
+		panCampos.add(new Label("Setor"), 0, 2);
+		panCampos.add(txtSetor, 1, 2);
 
 
 		panCampos.add(btnSalvar, 0, 4);

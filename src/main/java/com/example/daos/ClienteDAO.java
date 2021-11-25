@@ -67,7 +67,7 @@ public class ClienteDAO implements IClienteDAO {
         try {
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
 
-            String sql = "SELECT * FROM tableCliente WHERE nomeCliente like '%" + nome + "%'";
+            String sql = "SELECT * FROM TableCliente WHERE nomeCliente like '%" + nome + "%'";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -101,7 +101,7 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public void removerCliente(int idCliente) {
         try (Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS)) {
-            String sql = "DELETE FROM tableCliente WHERE idCliente = ?";
+            String sql = "DELETE FROM TableCliente WHERE idCliente = ?";
             System.out.println(sql);
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, idCliente);

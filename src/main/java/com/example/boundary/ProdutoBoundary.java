@@ -30,7 +30,6 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 	private TextArea txtADescricaoProduto = new TextArea();
 	private TextField txtQtdePecas = new TextField();
 	private TextField txtPrecoProduto = new TextField();
-	private Button btnNovoProduto = new Button("Novo Produto");
 	private Button btnSalvar = new Button("Salvar");
 	private Button btnPesquisar = new Button("Pesquisar");
 
@@ -125,11 +124,8 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 		Bindings.bindBidirectional(txtQtdePecas.textProperty(), control.quantidadeDePecas, new NumberStringConverter());
 		Bindings.bindBidirectional(txtPrecoProduto.textProperty(), control.precoProduto, new NumberStringConverter());
 
-
 		panCampos.add(new Label("Id Produto"), 0, 0);
 		panCampos.add(txtIdProduto, 1, 0);
-
-		panCampos.add(btnNovoProduto, 3, 0);
 
 		panCampos.add(new Label("Nome Produto"), 0, 1);
 		panCampos.add(txtNomeProduto, 1, 1);
@@ -153,10 +149,6 @@ public class ProdutoBoundary extends CommandProducer implements StrategyBoundary
 
 		btnPesquisar.setOnAction( e -> {
 			control.pesquisar();
-		});
-
-		btnNovoProduto.setOnAction( e -> {
-			control.novoProduto();
 		});
 
 		panPrincipal.setTop(panCampos);

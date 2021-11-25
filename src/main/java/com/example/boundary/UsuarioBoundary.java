@@ -61,7 +61,7 @@ public class UsuarioBoundary extends CommandProducer implements StrategyBoundary
         TableColumn<Usuarios, String> col9 = new TableColumn<>("Login ");
         col9.setCellValueFactory(new PropertyValueFactory<>("login"));
 
-        TableColumn<Usuarios, String> col10 = new TableColumn<>("Login ");
+        TableColumn<Usuarios, String> col10 = new TableColumn<>("Senha ");
         col10.setCellValueFactory(new PropertyValueFactory<>("senha"));
 
         TableColumn<Usuarios, String> col11 = new TableColumn<>("Ações");

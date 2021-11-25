@@ -6,7 +6,7 @@ import com.example.entity.Produto;
 public interface IProdutoDAO {
   void adicionar(Produto p);
   List<Produto> pesquisarPorNome(String nome);
-  void atualizar(int id, Produto p);
+  void atualizar(Produto p);
   void remover(int id);
 
 }

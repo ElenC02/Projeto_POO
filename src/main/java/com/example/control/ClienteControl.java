@@ -52,14 +52,14 @@ public class ClienteControl {
 
     public void salvar() {
         Cliente c = getEntity();
-       clienteDAO.adicionar(c);
+        clienteDAO.adicionar(c);
         atualizarListaView();
+        setEntity(new Cliente());
     }
 
     public void pesquisarCliente() {
         listaViewC.clear();
         List<Cliente> encontrados = clienteDAO.pesquisarPorCliente(nomeCliente.get());
-
         listaViewC.addAll(encontrados);
     }
 
@@ -72,6 +72,7 @@ public class ClienteControl {
         Cliente c = getEntity();
         clienteDAO.atualizarCliente(c.getIdCliente(), c.getNomeCliente(), c.getCPF(), c.getBandeiraCartao(),c.getNumeroCartao(), c.getNomeNoCartao(),c.getValidade(),c.getSeguranca());
         atualizarListaView();
+        setEntity(new Cliente());
     }
 
     public void atualizarListaView() {
@@ -82,7 +83,5 @@ public class ClienteControl {
     public ObservableList<Cliente> getListaView() {
         return listaViewC;
     }
-
-
-} // fim da classe
+}
 

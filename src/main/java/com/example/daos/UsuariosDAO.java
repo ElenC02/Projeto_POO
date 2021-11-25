@@ -74,7 +74,7 @@ private static final String DBURL = "jdbc:mysql://localhost:3306/EletronicosDB";
         try {
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
 
-            String sql = "SELECT * FROM tableUsuario WHERE nomeUsuario like '%" + nome + "%'";
+            String sql = "SELECT * FROM TableUsuario WHERE nomeUsuario like '%" + nome + "%'";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -104,26 +104,23 @@ private static final String DBURL = "jdbc:mysql://localhost:3306/EletronicosDB";
     }
 
     @Override
-    public void atualizar(int idUsuario, String nomeUsuario, int CEP, String ruaEnderecoNumero, String cidadeEndereco,
-                          String estadoEndereco, int telefoneUsuario, String tipoUsuario, String login, String senha) {
+    public void atualizar(Usuarios u) {
 
         try {
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-
             String sql1 = "UPDATE TableUsuario SET nomeUsuario = ?, CEP = ?, ruaEnderecoNumero = ?, cidadeEndereco = ?, estadoEndereco = ?, telefoneUsuario = ?, tipoUsuario = ?, login = ?, senha = ?  WHERE idUsuario = ?";
-
             PreparedStatement stmt = con.prepareStatement(sql1);
 
-            stmt.setInt(10, idUsuario);
-            stmt.setString(1,nomeUsuario);
-            stmt.setInt(2,  CEP);
-            stmt.setString(3, ruaEnderecoNumero);
-            stmt.setString(4, cidadeEndereco);
-            stmt.setString(5, estadoEndereco);
-            stmt.setInt(6, telefoneUsuario);
-            stmt.setString(7, tipoUsuario);
-            stmt.setString(8,login);
-            stmt.setString(9,senha);
+            stmt.setInt(1, u.getIdUsuario());
+            stmt.setString(2, u.getNomeUsuario());
+            stmt.setInt(3,  u.getCEP());
+            stmt.setString(4, u.getRuaEnderecoNumero());
+            stmt.setString(5, u.getCidadeEndereco());
+            stmt.setString(6, u.getEstadoEndereco());
+            stmt.setInt(7, u.getTelefoneUsuario());
+            stmt.setString(8, u.getTipoUsuario());
+            stmt.setString(9, u.getLogin());
+            stmt.setString(10, u.getSenha());
 
             stmt.executeUpdate();
 
@@ -141,7 +138,7 @@ private static final String DBURL = "jdbc:mysql://localhost:3306/EletronicosDB";
     @Override
     public void remover(long id) {
         try (Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS)) {
-            String sql = "DELETE FROM tableUsuario WHERE idusuario = ?";
+            String sql = "DELETE FROM TableUsuario WHERE idusuario = ?";
             System.out.println(sql);
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, id);
